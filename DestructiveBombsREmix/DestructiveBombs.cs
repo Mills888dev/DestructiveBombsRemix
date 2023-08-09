@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using BepInEx;
 using System.Linq;
 using RWCustom;
+using MoreSlugcats;
 using UnityEngine;
+using Expedition;
 using System.Reflection;
 
 
@@ -28,9 +30,12 @@ namespace DestructiveBombs
             On.RoomCamera.ChangeRoom += RoomCamera_ChangeRoom;
             On.AbstractRoom.Abstractize += AbstractRoom_Abstractize;
 
+            //On.Player.ClassMechanicsArtificer += artificer_BOOM;
+
             AIRemapController.go = new GameObject();
             AIRemapController.go.AddComponent<AIRemapController>();
         }
+
 
         private void AbstractRoom_Abstractize(On.AbstractRoom.orig_Abstractize orig, AbstractRoom self)
         {
@@ -139,6 +144,16 @@ namespace DestructiveBombs
             }
             orig.Invoke(self, eu);
         }
+        /*private void artificer_BOOM(On.Player.orig_ClassMechanicsArtificer orig, Player self, Player pyroJumpped)
+        {
+
+            DestructiveExplosion(self.room, self.mainBodyChunk.pos, 20f * 10f * configRadiusMul, (self.room.regionGate == null) && (self.room.shelterDoor == null));
+        }*/
+
+
+
+
+
 
         [System.Obsolete]
         private void DestructiveExplosion(Room room, Vector2 pos, float rad, bool affectTerrain = true)
