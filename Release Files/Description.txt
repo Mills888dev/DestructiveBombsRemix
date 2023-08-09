@@ -1,3 +1,0 @@
-Destructive Bombs by Slime_Cubed
-
-Makes explosions destroy terrain.

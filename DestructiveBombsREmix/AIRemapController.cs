@@ -3,6 +3,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
+
+
 class AIRemapController : MonoBehaviour
 {
     public static AIRemapController main;
@@ -14,7 +16,7 @@ class AIRemapController : MonoBehaviour
     {
         main = this;
     }
-    
+
     public void StopMappingRoom(Room room)
     {
         if (mappers.ContainsKey(room))
@@ -35,12 +37,12 @@ class AIRemapController : MonoBehaviour
     public void FixedUpdate()
     {
         if (_roomsToRemove.Count > 0) _roomsToRemove.Clear();
-        foreach(KeyValuePair<Room, AImapper> pair in mappers)
+        foreach (KeyValuePair<Room, AImapper> pair in mappers)
         {
             for (int step = 0; step < 300; step++)
             {
                 pair.Value.Update();
-                if(pair.Value.done)
+                if (pair.Value.done)
                 {
                     Debug.Log("Finished mapping room " + pair.Key.abstractRoom.name);
                     _roomsToRemove.Add(pair.Key);
@@ -51,7 +53,7 @@ class AIRemapController : MonoBehaviour
                 }
             }
         }
-        foreach(Room room in _roomsToRemove)
+        foreach (Room room in _roomsToRemove)
             mappers.Remove(room);
     }
 }
